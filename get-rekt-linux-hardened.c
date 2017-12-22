@@ -55,8 +55,7 @@ int bpf_create_map(enum bpf_map_type map_type, int key_size, int value_size,
 		.map_type = map_type,
 		.key_size = key_size,
 		.value_size = value_size,
-		.max_entries = max_entries,
-		.map_flags = map_flags,
+		.max_entries = max_entries
 	};
 
 	return syscall(__NR_bpf, BPF_MAP_CREATE, &attr, sizeof(attr));
